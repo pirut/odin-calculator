@@ -5,12 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="https://fav.farm/🟰" />
         <title>Odin Calculator</title>
-        <script src="./index.js"></script>
+        <script src="./index.js" defer></script>
         <link rel="stylesheet" href="./style.css" />
+        <script src="https://kit.fontawesome.com/3b1eab4468.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="calculator">
-            <div class="display"></div>
+            <div class="display">
+                <p>0</p>
+                <div class="operatorButton">
+                    <button id="equals"><i class="fa-solid fa-equals"></i></button>
+                </div>
+            </div>
             <div class="buttons">
                 <div class="leftButtons">
                     <div class="buttonRow">
@@ -32,7 +38,23 @@
                         <button>0</button>
                     </div>
                 </div>
-                <div class="rightButtons"></div>
+                <div class="rightButtons">
+                    <div class="operatorButton">
+                        <button id="erase"><i class="fa-solid fa-eraser"></i></button>
+                    </div>
+                    <div class="operatorButton">
+                        <button id="add"><i class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <div class="operatorButton">
+                        <button id="subtract"><i class="fa-solid fa-minus"></i></button>
+                    </div>
+                    <div class="operatorButton">
+                        <button id="multiply"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="operatorButton">
+                        <button id="divide"><i class="fa-solid fa-divide"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

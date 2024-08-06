@@ -8,30 +8,55 @@ function addNumber(currentNumber, adderNumber) {
     return parseInt(currentNumber + adderNumber);
 }
 
-function evaluateNumbers(operation) {
-    if (operation.first === null && operation.second === null) {
-        return 0;
-    } else if (operation.first !== null && operation.second === null) {
-        return operation.first;
+function evaluateNumbers() {
+    if (calculator.second === null) {
+        return calculator.first;
     } else {
-        switch (operation.operator) {
+        switch (calculator.operator) {
             case "add":
-                return operation.first + operation.second;
+                calculator.result = calculator.first + calculator.second;
+                break;
             case "subtract":
-                return operation.first - operation.second;
+                calculator.result = calculator.first - calculator.second;
+                break;
             case "multiply":
-                return operation.first * operation.second;
+                calculator.result = calculator.first * calculator.second;
+                break;
             case "divide":
-                return operation.first / operation.second;
+                calculator.result = calculator.first / calculator.second;
+                break;
             default:
-                return null;
+                calculator.result = null;
+                break;
         }
     }
 }
 
+function addOperator(operator) {
+    calculator.operator = operator;
+    calculator.workingNum = 1;
+    if (calculator.second === null) {
+        calculator.second = 0;
+    }
+    displayElement.textContent = calculator.second;
+}
+
+function calculatorReset() {
+    calculator = {
+        first: 0,
+        second: null,
+        operator: null,
+        result: null,
+        workingNum: 0,
+        reset: false,
+    };
+    displayElement.textContent = calculator.first;
+}
+
 let calculator = {
-    first: null,
+    first: 0,
     second: null,
     operator: null,
     result: null,
+    reset: false,
 };

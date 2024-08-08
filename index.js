@@ -5,7 +5,7 @@ const displayElement = document.querySelector(".display p");
 function addNumber(currentNumber, adderNumber) {
     currentNumber = currentNumber.toString();
     adderNumber = adderNumber.toString();
-    return parseInt(currentNumber + adderNumber);
+    return parseFloat(currentNumber + adderNumber);
 }
 
 function evaluateNumbers() {
@@ -36,9 +36,12 @@ function evaluateNumbers() {
 }
 
 function addOperator(operator) {
-    if (calculator.operator !== null) {
-        calculator.second = parseInt(displayElement.textContent);
+    if (calculator.operator !== null && calculator.result === parseFloat(displayElement.textContent)) {
+        calculator.second = parseFloat(displayElement.textContent);
         evaluateNumbers();
+    } else if (calculator.operator !== null) {
+        evaluateNumbers();
+        calculator.second = 0;
     }
     calculator.evalFlag = false;
     calculator.operator = operator;
@@ -87,4 +90,8 @@ let calculator = {
 numButtonsElement.addEventListener("click", (event) => {
     numButtonPress(parseInt(event.target.textContent));
     // console.log(parseInt(event.target.textContent));
+});
+
+operatorButtonsElement.addEventListener("click", (event) => {
+    addOperator(event.target.getAttribute("value"));
 });

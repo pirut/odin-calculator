@@ -32,22 +32,11 @@ function evaluateNumbers() {
 }
 
 function addOperator(operator) {
-    if (calculator.operator !== null && calculator.result === parseFloat(displayElement.textContent)) {
-        calculator.second = parseFloat(displayElement.textContent);
+    if (calculator.operator !== null) {
         evaluateNumbers();
-    } else if (calculator.operator !== null) {
-        evaluateNumbers();
-        calculator.second = 0;
-    } else if (calculator.reset) {
-        calculator.second = parseFloat(displayElement.textContent);
-        evaluateNumbers();
+        calculator.reset = false;
     }
-    calculator.reset = false;
     calculator.operator = operator;
-    calculator.workingNum = 1;
-    if (calculator.second === null) {
-        calculator.second = 0;
-    }
 }
 
 function calculatorReset() {

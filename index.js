@@ -1,16 +1,12 @@
 const numButtonsElement = document.querySelector(".leftButtons");
 const operatorButtonsElement = document.querySelector(".rightButtons");
 const displayElement = document.querySelector(".display p");
-
-function addNumber(currentNumber, adderNumber) {
-    currentNumber = currentNumber.toString();
-    adderNumber = adderNumber.toString();
-    return parseFloat(currentNumber + adderNumber);
-}
+const equalsButtonElement = document.querySelector(".display .operatorButton");
 
 function evaluateNumbers() {
     if (calculator.second === null) {
         calculator.result = calculator.first;
+        calculator.reset = true;
     } else {
         switch (calculator.operator) {
             case "add":
@@ -29,7 +25,7 @@ function evaluateNumbers() {
                 calculatorReset();
                 break;
         }
-        calculator.evalFlag = true;
+        calculator.reset = true;
         calculator.first = calculator.result;
         displayElement.textContent = calculator.result;
     }
@@ -42,8 +38,11 @@ function addOperator(operator) {
     } else if (calculator.operator !== null) {
         evaluateNumbers();
         calculator.second = 0;
+    } else if (calculator.reset) {
+        calculator.second = parseFloat(displayElement.textContent);
+        evaluateNumbers();
     }
-    calculator.evalFlag = false;
+    calculator.reset = false;
     calculator.operator = operator;
     calculator.workingNum = 1;
     if (calculator.second === null) {
@@ -53,45 +52,32 @@ function addOperator(operator) {
 
 function calculatorReset() {
     calculator = {
-        first: 0,
-        second: null,
+        memory: 0,
         operator: null,
-        result: null,
-        workingNum: 0,
-        evalFlag: false,
         reset: false,
     };
-    displayElement.textContent = calculator.first;
+    displayElement.textContent = calculator.memory;
 }
 
 function numButtonPress(number) {
-    if (calculator.evalFlag) {
-        calculatorReset();
-    }
-    if (calculator.workingNum === 0) {
-        calculator.first = addNumber(calculator.first, number);
-        displayElement.textContent = calculator.first;
-    } else {
-        calculator.second = addNumber(calculator.second, number);
-        displayElement.textContent = calculator.second;
-    }
+    displayElement.textContent += number;
 }
 
 let calculator = {
-    first: 0,
-    second: null,
+    memory: 0,
     operator: null,
-    result: null,
-    workingNum: 0,
-    evalFlag: false,
     reset: false,
 };
 
 numButtonsElement.addEventListener("click", (event) => {
-    numButtonPress(parseInt(event.target.textContent));
-    // console.log(parseInt(event.target.textContent));
+    numButtonPress(event.target.textContent);
 });
 
 operatorButtonsElement.addEventListener("click", (event) => {
-    addOperator(event.target.getAttribute("value"));
+    const value = event.target.getAttribute("value");
+    value === "erase" ? calculatorReset() : addOperator(value);
+});
+
+equalsButtonElement.addEventListener("click", (event) => {
+    evaluateNumbers();
 });

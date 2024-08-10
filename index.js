@@ -60,7 +60,12 @@ function calculatorReset() {
 }
 
 function numButtonPress(number) {
-    displayElement.textContent += number;
+    if (displayElement.textContent === "0") {
+        displayElement.textContent = number;
+    } else if (number === "." && displayElement.textContent.includes(".")) {
+    } else {
+        displayElement.textContent += number;
+    }
 }
 
 let calculator = {
@@ -70,7 +75,7 @@ let calculator = {
 };
 
 numButtonsElement.addEventListener("click", (event) => {
-    numButtonPress(event.target.textContent);
+    numButtonPress(event.target.getAttribute("value"));
 });
 
 operatorButtonsElement.addEventListener("click", (event) => {

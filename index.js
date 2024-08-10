@@ -4,30 +4,32 @@ const displayElement = document.querySelector(".display p");
 const equalsButtonElement = document.querySelector(".display .operatorButton");
 
 function evaluateNumbers() {
-    if (calculator.second === null) {
-        calculator.result = calculator.first;
-        calculator.reset = true;
-    } else {
+    if (calculator.reset) {
+        return 0;
+    } else if (calculator.memory !== null) {
+        let current = parseFloat(displayElement.textContent);
+        let result;
         switch (calculator.operator) {
             case "add":
-                calculator.result = calculator.first + calculator.second;
+                result = calculator.memory + current;
                 break;
             case "subtract":
-                calculator.result = calculator.first - calculator.second;
+                result = calculator.memory - current;
                 break;
             case "multiply":
-                calculator.result = calculator.first * calculator.second;
+                result = calculator.memory * current;
                 break;
             case "divide":
-                calculator.result = calculator.first / calculator.second;
+                result = calculator.memory / current;
                 break;
             default:
                 calculatorReset();
                 break;
         }
         calculator.reset = true;
-        calculator.first = calculator.result;
-        displayElement.textContent = calculator.result;
+        calculator.resetNum = true;
+        calculator.memory = result;
+        displayElement.textContent = result;
     }
 }
 
@@ -36,31 +38,41 @@ function addOperator(operator) {
         evaluateNumbers();
         calculator.reset = false;
     }
+    calculator.memory = parseFloat(displayElement.textContent);
+    calculator.resetNum = true;
     calculator.operator = operator;
 }
 
 function calculatorReset() {
     calculator = {
-        memory: 0,
+        memory: null,
         operator: null,
         reset: false,
+        resetNum: false,
     };
-    displayElement.textContent = calculator.memory;
+    displayElement.textContent = 0;
 }
 
 function numButtonPress(number) {
+    if (calculator.reset) {
+        calculatorReset();
+    } else if (calculator.resetNum) {
+        displayElement.textContent = "0";
+    }
     if (displayElement.textContent === "0") {
         displayElement.textContent = number;
     } else if (number === "." && displayElement.textContent.includes(".")) {
+        //do nothing
     } else {
         displayElement.textContent += number;
     }
 }
 
 let calculator = {
-    memory: 0,
+    memory: null,
     operator: null,
     reset: false,
+    resetNum: false,
 };
 
 numButtonsElement.addEventListener("click", (event) => {

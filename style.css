@@ -1,6 +1,15 @@
 body {
     display: flex;
     justify-content: center;
+    font-family: monospace;
+    font-size: xx-large;
+}
+
+button {
+    display: flex;
+    flex: 1;
+    justify-self: stretch;
+    align-self: stretch;
 }
 
 .calculator,
@@ -22,6 +31,9 @@ body {
 
 .display {
     justify-content: space-between;
+    padding-left: 16px;
+    padding-right: 16px;
+    border: 6px solid black;
 }
 
 /* Button Courtesy of Sketch */
@@ -184,4 +196,25 @@ body {
 .equalsButton:active {
     border-width: 4px 0 0;
     background: none;
+}
+
+.leftButtons {
+    flex: 1;
+    justify-content: stretch;
+    align-items: stretch;
+    margin: 0;
+}
+
+.buttonRow {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: stretch;
+    align-content: stretch;
+}
+
+.buttons {
+    flex: 1;
+    justify-content: stretch;
+    align-items: stretch;
 }

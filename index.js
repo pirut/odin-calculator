@@ -1,7 +1,7 @@
 const numButtonsElement = document.querySelector(".leftButtons");
 const operatorButtonsElement = document.querySelector(".rightButtons");
 const displayElement = document.querySelector(".display p");
-const equalsButtonElement = document.querySelector(".display .operatorButton");
+const equalsButtonElement = document.querySelector(".display .equalsButton");
 
 function evaluateNumbers() {
     if (calculator.reset) {
@@ -58,6 +58,7 @@ function numButtonPress(number) {
         calculatorReset();
     } else if (calculator.resetNum) {
         displayElement.textContent = "0";
+        calculator.resetNum = false;
     }
     if (displayElement.textContent === "0") {
         displayElement.textContent = number;

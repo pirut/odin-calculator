@@ -6,8 +6,10 @@ I have 3 main things I need to accomplish to get this done.
  1. Layout the HTML code with corresponding classes and other misc tags
  2. Make it work with 3 main JS functions, making number buttons add to the text, making operators clear the text and operate, making the "=" button return result
  3. style it
+## Post completion Notes
+I learned that it's okay to not get it right on the first try. I made a bunch of functions and checks, and then when I looked at it near the end it looked l
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTI2NDY3MjQxXX0=
+eyJoaXN0b3J5IjpbLTE3OTE5MjMwMDUsOTI2NDY3MjQxXX0=
 -->
